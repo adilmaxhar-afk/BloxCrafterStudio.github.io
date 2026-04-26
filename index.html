@@ -1,0 +1,505 @@
+Here's the **fully animated premium version** with **ALL dropdowns working perfectly**:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Game Studio - Custom Games $1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #475569);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Animated Header */
+        .header {
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), #ec4899);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            animation: shine 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes shine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .price-hero {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ffed4a, #fbbf24);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 30px 0;
+            display: block;
+            animation: bounce 2s infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Stats Grid */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            perspective: 1000px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stat-card:hover {
+            transform: rotateY(10deg) rotateX(10deg) translateZ(20px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            animation: countUp 2s ease-out;
+        }
+
+        /* Form */
+        .form-section {
+            margin: 80px 0;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            position: relative;
+            animation: fadeInLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+            animation: fadeInUpForm 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUpForm {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: var(--light);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            color: var(--light);
+            font-size: 1rem;
+            font-family: inherit;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 15px center;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            padding-right: 60px;
+            appearance: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 160px;
+        }
+
+        /* Payment Section */
+        .payment-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
+            padding: 40px;
+            border-radius: 24px;
+            margin: 40px 0;
+            text-align: center;
+            animation: pulseGlow 3s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+        }
+
+        .payment-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #5865f2, #4752c4);
+            color: white;
+        }
+
+        .btn-email {
+            background: linear-gradient(45deg, #ea4335, #dd3633);
+            color: white;
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, var(--success), #059669);
+            color: white;
+            width: 100%;
+            padding: 28px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 24px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '🚀';
+            position: absolute;
+            font-size: 1.5rem;
+            right: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10000;
+            backdrop-filter: blur(20px);
+            animation: modalSlide 0.5s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .success-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: linear-gradient(135deg, var(--success), #059669);
+            padding: 60px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+        }
+
+        @keyframes modalPop {
+            to { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .copied-text {
+            background: rgba(0,0,0,0.4);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: left;
+            white-space: pre-wrap;
+            border-left: 4px solid var(--light);
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .logo { font-size: 3rem; }
+            .price-hero { font-size: 4rem; }
+            .payment-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header glass">
+            <div class="logo">
+                <i class="fab fa-roblox" style="margin-right: 15px;"></i>
+                Roblox Studio Pro
+            </div>
+            <div class="price-hero">$1 Custom Games</div>
+            <p style="font-size: 1.4rem; opacity: 0.9; animation: fadeIn 2s ease-out 0.5s both;">
+                Any Roblox game • Lightning fast • Studio quality • Money-back guarantee
+            </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card glass">
+                <div class="stat-number">⚡ 24h</div>
+                <p>Delivery Time</p>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-number">⭐ 100%</div>
+                <p>Satisfaction</p>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-number">💎 $1</div>
+                <p>Per Game</p>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-number">🎮 ∞</div>
+                <p>Game Types</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-section">
+            <div class="form-container glass">
+                <h2 class="form-title">Build Your Dream Game</h2>
+                
+                <form id="gameForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Full Name *</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-discord"></i> Discord Tag *</label>
+                            <input type="text" name="discord" placeholder="username#1234" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email *</label>
+                            <input type="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-gamepad"></i> Roblox Username</label>
+                            <input type="text" name="robloxUsername" placeholder="YourRobloxName">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label><i class="fas fa-list"></i> Game Type *</label>
+                        <select name="gameType" required>
+                            <option value="">🎮 Choose your game...</option>
+                            <option value
